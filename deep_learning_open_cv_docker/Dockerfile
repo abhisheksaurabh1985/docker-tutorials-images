@@ -38,6 +38,10 @@ MAINTAINER Abhishek Saurabh <abhishek_saurabh001@yahoo.co.in>
 # container_name: Self-explanatory
 # bash: Optional parameter. Even if this isn't provided, by default a bash session starts.
 
+# Issue with running jupyter Notebook
+# https://stackoverflow.com/questions/38830610/access-jupyter-notebook-running-on-docker-container
+# Inside the Container : jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+# Host machine access this url : localhost:8888/tree‌​
 ###########################################################################################
 
 # Supress warnings about missing front-end. As recommended at:
@@ -164,4 +168,3 @@ CMD ["/bin/bash"]
 # Jupyter has issues with being run directly: https://github.com/ipython/ipython/issues/7062
 COPY run_jupyter.sh /root/
 CMD ["/run_jupyter.sh"]
-
