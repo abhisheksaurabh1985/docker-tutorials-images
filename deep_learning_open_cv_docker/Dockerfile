@@ -17,10 +17,19 @@ MAINTAINER Abhishek Saurabh <abhishek_saurabh001@yahoo.co.in>
 # To build the docker file (might have to run with sudo)
 #    $ sudo docker build -t <container_name> .
 
+# Terminal output after installation
+# ==================================
+# Successfully built a8571a7ef3f5 # a8571a7ef3f5 is the Image ID.
+# Successfully tagged deep_learning_opencv:latest # Note the tag 'latest'
+
+# After the successful run of docker build, you'll have two containers: container_name  is of about 4 GB
+# while the ubuntu image is about 114 MB in size.
+
 # Running the Docker image as a container
 # ============================================
 # docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder container-name bash
 
+# Command parameters are explained below:
 # -it: for creating a terminal to interact with the container_name
 # -p 8888:8888 -p 6006:6006 : This exposes the ports inside the container so they can be accessed from the
 #                             host. The format is -p <host-port>:<container-port>. The default iPython Notebook
@@ -28,8 +37,8 @@ MAINTAINER Abhishek Saurabh <abhishek_saurabh001@yahoo.co.in>
 #  -v /sharedfolder:/root/sharedfolder: sharedfolder on host machine is shared with /root/sharedfolder in the container.
 # container_name: Self-explanatory
 # bash: Optional parameter. Even if this isn't provided, by default a bash session starts.
-###########################################################################################
 
+###########################################################################################
 
 # Supress warnings about missing front-end. As recommended at:
 # http://stackoverflow.com/questions/22466255/is-it-possibe-to-answer-dialog-questions-when-installing-under-docker
@@ -65,7 +74,7 @@ RUN pip3 --no-cache-dir install \
 RUN pip3 --no-cache-dir install jupyter && \
     mkdir /root/.jupyter && \
     echo "c.NotebookApp.ip = '*'" \
-         "\nc.NotebookApp.open_browser = True" \
+         "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.token = ''" \
          > /root/.jupyter/jupyter_notebook_config.py
 EXPOSE 8888
@@ -151,3 +160,8 @@ RUN pip3 install --no-cache-dir git+https://github.com/waleedka/coco.git#subdire
 
 WORKDIR "/root"
 CMD ["/bin/bash"]
+
+# Jupyter has issues with being run directly: https://github.com/ipython/ipython/issues/7062
+COPY run_jupyter.sh /root/
+CMD ["/run_jupyter.sh"]
+
