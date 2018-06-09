@@ -42,6 +42,14 @@ MAINTAINER Abhishek Saurabh <abhishek_saurabh001@yahoo.co.in>
 # https://stackoverflow.com/questions/38830610/access-jupyter-notebook-running-on-docker-container
 # Inside the Container : jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # Host machine access this url : localhost:8888/tree‌​
+
+# To allow display sharing from within the docker container use the following command:
+# https://github.com/oreillymedia/Learning-OpenCV-3_examples/blob/master/Dockerfile
+# xhost + # Allows other processes to share the display
+# sudo docker run -it -p 8888:8888 -p 6006:6006 \
+#		    -e DISPLAY=$DISPLAY  -v /tmp/.X11-unix:/tmp/.X11-unix \
+# 		    --device /dev/video0 \
+#		    -v /home/abhishek/Desktop/Projects:/root/sharedfolder deep_learning_opencv bash
 ###########################################################################################
 
 # Supress warnings about missing front-end. As recommended at:
@@ -167,4 +175,4 @@ CMD ["/bin/bash"]
 
 # Jupyter has issues with being run directly: https://github.com/ipython/ipython/issues/7062
 COPY run_jupyter.sh /root/
-CMD ["/run_jupyter.sh"]
+# CMD ["/run_jupyter.sh"]
