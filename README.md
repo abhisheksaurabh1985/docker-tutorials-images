@@ -1,9 +1,11 @@
-# docker-tutorials-images
+# Docker tutorials and images
+## Docker tutorials
+Work in progress (in fact halted from quite some time now). Not sure, when will I be able to restart working on it. Nonetheless, keep a check on the docker images. 
 
-# Docker image for Deep Learning and Computer vision
+## Docker image for Deep Learning and Computer vision
 The docker image for deep learning and computer vision in this repository is built on top of the image maintained by [waleedka](https://github.com/waleedka).
 
-## Steps to build this Docker image
+### Steps to build this Docker image
 1. Create a directory `container_name`: `mkdir container_name`
 2. Copy this Dockerfile into that directory:`cp Dockerfile container_name/.`
 3. Move to that directory:`cd container_name`
@@ -15,7 +17,7 @@ Successfully tagged deep_learning_opencv:latest # Note the tag 'latest'. 'deep_l
 ```
 5. Run `docker ps -a` to see if you have two containers: __container\_name__ of about 4GB and __ubuntu__ image of about 114 MB.
 
-## Run this docker image as a containers
+### Run this docker image as a container
 __If you want to use OpenCV in your project as well, then use the run command as given in the section on *Display sharing from within the docker container*__.
 ```bash
 docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder container-name bash
@@ -29,13 +31,14 @@ Command parameters are explained below:
 * container_name: Self-explanatory
 * bash: Optional parameter. Even if this isn't provided, by default a bash session starts.
 
-## Issues with running jupyter Notebook
+### `jupyter` Notebook
+While `jupyter notebook` on the bash of the container, didn't throw any error, notebooks didn't show up on the browser either.
 This solution is taken from [this](https://stackoverflow.com/questions/38830610/access-jupyter-notebook-running-on-docker-container) on __stackoverflow__.
 1. Inside the Container : `jupyter notebook --ip 0.0.0.0 --no-browser --allow-root`
 2. On the host machine access this url : `localhost:8888/tree`
 
-## Display sharing from within the docker container
-This solution is taken from the instructions in  [this](https://github.com/oreillymedia/Learning-OpenCV-3_examples/blob/master/Dockerfile) opencv docker image.
+### Display sharing from within the docker container
+In order to access the video camera of the host machine, run the following commands. This solution was taken from the instructions given in [this](https://github.com/oreillymedia/Learning-OpenCV-3_examples/blob/master/Dockerfile) opencv Dockerfile.
 
 1. Allow other processes to share the display. Run `xhost +` on your host machine.
 2. Run the container:
