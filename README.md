@@ -1,9 +1,15 @@
 # Docker tutorials and images
 ## Docker tutorials
-Work in progress (in fact halted from quite some time now). Not sure, when will I be able to restart working on it. Nonetheless, keep a check on the docker images. 
+Work in progress (in fact halted from quite some time now). Not sure, when will I be able to restart working on it. Nonetheless, keep a check on the docker images.
 
-## Docker image for Deep Learning and Computer vision
+## Docker image for Deep Learning and Computer Vision
 The docker image for deep learning and computer vision in this repository is built on top of the image maintained by [waleedka](https://github.com/waleedka).
+
+The resulting docker container has the following libraries installed for `Python 3.5`.
+1. `tensorflow-cpu`: version 1.8.0
+2. `keras`: version 2.2.0
+3. `Open CV`: version 3.4.1
+4. The original image from [waleedka](https://github.com/waleedka) also had PyTorch, Caffe, PyCocoTools and JDK. I have retained all these libraries but have not used these libraries as of the writing of this document. Feel free to use and report the issues.
 
 ### Steps to build this Docker image
 1. Create a directory `container_name`: `mkdir container_name`
@@ -18,18 +24,18 @@ Successfully tagged deep_learning_opencv:latest # Note the tag 'latest'. 'deep_l
 5. Run `docker ps -a` to see if you have two containers: __container\_name__ of about 4GB and __ubuntu__ image of about 114 MB.
 
 ### Run this docker image as a container
-__If you want to use OpenCV in your project as well, then use the run command as given in the section on *Display sharing from within the docker container*__.
+__If you run the container using the command below, you will not be able to access the display of the host machine. Should you want to use the display of the host, then run the command as given in the section on *Display sharing from within the docker container*__.
 ```bash
 docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder container-name bash
 ```
 Command parameters are explained below:
-* -it: for creating a terminal to interact with the container_name
-* -p 8888:8888 -p 6006:6006 : This exposes the ports inside the container so they can be accessed from the
+* `-it`: for creating a terminal to interact with the container_name
+* `-p 8888:8888 -p 6006:6006`: This exposes the ports inside the container so they can be accessed from the
                              host. The format is -p <host-port>:<container-port>. The default iPython Notebook
                              runs on port 8888 and Tensorboard on 6006
-*  -v /sharedfolder:/root/sharedfolder: sharedfolder on host machine is shared with /root/sharedfolder in the container.
-* container_name: Self-explanatory
-* bash: Optional parameter. Even if this isn't provided, by default a bash session starts.
+*  `-v /sharedfolder:/root/sharedfolder: sharedfolder` on host machine is shared with `/root/sharedfolder` in the container.
+* `container_name`: Self-explanatory
+* `bash`: Optional parameter. Even if this isn't provided, by default a bash session starts.
 
 ### `jupyter` Notebook
 While `jupyter notebook` on the bash of the container, didn't throw any error, notebooks didn't show up on the browser either.
