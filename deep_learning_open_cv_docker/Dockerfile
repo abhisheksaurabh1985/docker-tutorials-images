@@ -173,7 +173,8 @@ RUN pip3 install --no-cache-dir git+https://github.com/waleedka/coco.git#subdire
 #
 # imutils and dlib
 # Dlib is a modern C++ toolkit containing machine learning algorithms and tools for creating complex software in C++ to solve real world problems.
-#
+RUN pip3 install imutils
+RUN pip3 install dlib
 
 
 WORKDIR "/root"
