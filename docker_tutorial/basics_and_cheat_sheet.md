@@ -1,6 +1,6 @@
-Source: [Docker official docs](https://docs.docker.com/get-started/#docker-concepts)
-
 ## Containerization
+- __Source__: [Docker official docs](https://docs.docker.com/get-started/#docker-concepts)
+
 - The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is.
 - Containerization is increasingly popular because containers are:
   - Flexible, Lightweight, Interchangeable, Portable, Scalable, Stackable
@@ -11,6 +11,17 @@ Source: [Docker official docs](https://docs.docker.com/get-started/#docker-conce
   - applications have no system dependencies
   - updates can be pushed to any part of a distributed application
   - resource density can be optimized
+
+## Understanding how the Docker Daemon and Docker CLI Work Together
+- __Source__: [Nick Janetakis's blog](https://nickjanetakis.com/blog/understanding-how-the-docker-daemon-and-docker-cli-work-together)
+
+__Key Points__
+- It has a client-server architecture. 
+- The __Docker daemon__ is a service that runs on your host operating system. It currently only runs on Linux because it depends on a number of Linux kernel features, but there are a few ways to run Docker on MacOS and Windows too.
+- The Docker daemon itself exposes a __REST API__. From here, a number of different tools can talk to the daemon through this API.
+- The most widespread tool is the __Docker CLI__. It is a command line tool that lets you talk to the Docker daemon. When you install Docker, you get both the Docker daemon and the Docker CLI tools together.
+
+![alt text](https://nickjanetakis.com/assets/blog/docker-client-host-registry-fc0858b5191e042ce19437fd6b52ba214d1e429bf646374f633598ebaac1a4ab.jpg)
 
 ## Cheat sheet
 
